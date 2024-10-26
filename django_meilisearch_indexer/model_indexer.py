@@ -17,7 +17,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q, QuerySet
 from meilisearch import Client
 
-from django_meilisearch_indexer.search import build_search_filter
+from django_meilisearch_indexer.search_utils import build_search_filter
 from django_meilisearch_indexer.types import (
     MeilisearchFilters,
     MeilisearchSearchHits,

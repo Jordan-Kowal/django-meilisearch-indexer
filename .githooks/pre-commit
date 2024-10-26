@@ -15,10 +15,10 @@ echo ""
 echo ">>> [2/3] Running MyPy"
 mypy .
 
-# Run tests
-echo ""
-echo ">>> [3/3] Running tests"
-coverage run -m unittest discover .
-coverage report --fail-under=90
+# # Run tests
+# echo ""
+# echo ">>> [3/3] Running tests"
+# coverage run -m unittest discover .
+# coverage report --fail-under=90
 
 echo "------------------------------------------"

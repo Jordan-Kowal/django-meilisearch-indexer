@@ -5,7 +5,7 @@ from django.db.models import Model, Q
 from django.test import tag
 from meilisearch import Client
 
-from django_meilisearch_indexer.indexer import MeilisearchModelIndexer
+from django_meilisearch_indexer.model_indexer import MeilisearchModelIndexer
 
 M = TypeVar("M", bound=Model)
 
