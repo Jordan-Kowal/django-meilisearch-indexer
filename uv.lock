@@ -329,11 +329,12 @@ wheels = [
 [[package]]
 name = "django-meilisearch-indexer"
 version = "1.0.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "django" },
     { name = "djangorestframework" },
     { name = "meilisearch" },
+    { name = "typing-extensions" },
 ]
 
 [package.dev-dependencies]
@@ -350,6 +351,7 @@ requires-dist = [
     { name = "django", specifier = ">=4.0.0" },
     { name = "djangorestframework", specifier = ">=3.13.0" },
     { name = "meilisearch", specifier = ">=0.28.0" },
+    { name = "typing-extensions", specifier = ">=4.12.2" },
 ]
 
 [package.metadata.requires-dev]
