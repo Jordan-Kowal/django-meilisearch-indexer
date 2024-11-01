@@ -15,7 +15,14 @@ uv sync
 
 ### Tests
 
-Tests are run using either `unittest` or `coverage`.
+The test suite is composed of both **unittests** and **integration tests** (ran against a local Meilisearch instance).
+To start the meilisearch instance, simply run the following command:
+
+```shell
+docker-compose up
+```
+
+Then, you can run tests using either `unittest` or `coverage`.
 
 With `unittest`:
 
@@ -45,7 +52,8 @@ Run the following command to tell `git` to look for hooks in this folder:
 git config core.hooksPath .githooks
 ```
 
-Pre-commit hooks will run `ruff`, `mypy`, and `unittest` on each commit.
+Pre-commit hooks will run `ruff`, `mypy`, and `coverage` on each commit.
+Make sure to have your **Meilisearch** instance running before committing.
 
 ### CI/CD
 

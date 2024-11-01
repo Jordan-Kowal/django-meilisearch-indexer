@@ -2,6 +2,7 @@ name: Tests
 
 on:
   workflow_call:
+  # The "on push" event is necessary for the README badges
   push:
     branches: ['main']
   pull_request:
@@ -46,6 +47,16 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12']
+
+    services:
+      meilisearch:
+        image: getmeili/meilisearch:v1.11.0
+        env:
+          MEILI_HTTP_ADDR: 0.0.0.0:7700
+          MEILI_MASTER_KEY: meilisearch_local_master_key
+        ports:
+          - 7700:7700
+        options: --health-cmd="curl -f http://localhost:7700/health" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
       - uses: actions/checkout@v4

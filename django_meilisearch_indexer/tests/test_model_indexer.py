@@ -25,7 +25,7 @@ settings.configure(
     DATABASES={"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}},
     DEFAULT_AUTO_FIELD="django.db.models.AutoField",
     MEILISEARCH_HOST="http://localhost:7700",
-    MEILISEARCH_API_KEY="nje#_zn0wfh49m9_&8sd10cr&i51^na3fn61fkdbs*ol21doz(",
+    MEILISEARCH_API_KEY="meilisearch_local_master_key",
 )
 django.setup()
 
