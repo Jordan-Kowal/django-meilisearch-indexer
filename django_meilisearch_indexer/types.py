@@ -83,10 +83,6 @@ class MeilisearchSearchParameters(TypedDict, total=False):
     attributesToSearchOn: Optional[List[str]]
 
 
-class MeilisearchSearchHits(TypedDict, total=False):
-    hits: List[Dict[str, Any]]
-
-
 class MeilisearchSearchResults(TypedDict, total=False):
     hits: List[Dict[str, Any]]
     offset: int
@@ -100,3 +96,7 @@ class MeilisearchSearchResults(TypedDict, total=False):
     facetStats: Dict[str, Dict[str, int]]
     processingTimeMs: int
     query: str
+
+
+class MeilisearchSearchHits(TypedDict, total=False):
+    hits: List[Dict[str, Any]]

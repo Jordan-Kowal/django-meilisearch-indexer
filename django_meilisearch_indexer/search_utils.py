@@ -18,6 +18,7 @@ def build_search_filter(
     lt: List[Tuple[str, MeilisearchFilterValue]] = None,
     lte: List[Tuple[str, MeilisearchFilterValue]] = None,
 ) -> str:
+    """Builds a search filter string for Meilisearch using the provided supported filters."""
     filters = []
     if is_empty is not None:
         filters.extend([f"{field} IS EMPTY" for field in is_empty])
