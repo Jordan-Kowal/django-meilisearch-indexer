@@ -4,9 +4,9 @@ version = "1.0.0"
 requires-python = ">=3.9"
 description = "Meilisearch indexer for django models and related utilities"
 dependencies = [
-    "django>=4.2.16",
-    "djangorestframework>=3.15.2",
-    "meilisearch>=0.31.5",
+    "django>=4.0.0",
+    "djangorestframework>=3.13.0",
+    "meilisearch>=0.28.0",
 ]
 readme = "README.md"
 authors = [{ name = "Jordan Kowal", email = "kowaljordan@gmail.com" }]
@@ -80,3 +80,12 @@ docstring-code-format = true
 [tool.ruff.lint.isort]
 known-first-party = ["django_meilisearch_indexer"]
 force-sort-within-sections = true
+
+# ------------------------------
+# COVERAGE
+# ------------------------------
+[tool.coverage.run]
+omit = ["*/__init__.py", "*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:"]

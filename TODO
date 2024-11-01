@@ -1,5 +1,8 @@
 # TODO
 
 - Write tests
+  - Update contributing with docker-compose
+  - Update CI with docker-compose
+- Update docstrings
 - Python compatibility versions (CI, contributing, pyproject)
 - README

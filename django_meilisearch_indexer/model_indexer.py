@@ -73,7 +73,7 @@ class MeilisearchModelIndexer(ABC, Generic[M]):
     @classmethod
     def update_settings(cls) -> None:
         """Updates the index settings."""
-        cls.meilisearch_client().index(cls.index_name()).update_settings(cls.SETTINGS)
+        cls.meilisearch_client().index(cls.index_name()).update_settings(cls.SETTINGS)  # type: ignore
 
     # --------------------------------------------------
     # Indexing
@@ -106,7 +106,7 @@ class MeilisearchModelIndexer(ABC, Generic[M]):
         # Create temporary index
         tmp_index_name = f"{cls.index_name()}_tmp"
         client.create_index(tmp_index_name, {"primaryKey": cls.PRIMARY_KEY})
-        client.index(tmp_index_name).update_settings(cls.SETTINGS)
+        client.index(tmp_index_name).update_settings(cls.SETTINGS)  # type: ignore
         # Index all objects on it
         cls._index_from_query(Q(), tmp_index_name)
         # Swap indexes and cleanup
