@@ -1,5 +1,5 @@
 from time import sleep
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 from unittest import TestCase
 
 import django
@@ -240,7 +240,7 @@ class UserIndexerTestCase(TestCase):
 
     def assertSearchHits(
         self,
-        response: MeilisearchSearchHits | MeilisearchSearchResults,
+        response: Union[MeilisearchSearchHits, MeilisearchSearchResults],
         items: List[User],
     ) -> None:
         ids = {hit["id"] for hit in response["hits"]}
