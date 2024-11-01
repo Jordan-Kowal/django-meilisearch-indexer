@@ -1,4 +1,9 @@
 from .model_indexer import MeilisearchModelIndexer
+from .serializers import (
+    MeilisearchOnlyHitsResponseSerializer,
+    MeilisearchSearchResultsSerializer,
+    MeilisearchSimpleSearchSerializer,
+)
 from .types import (
     Faceting,
     MeilisearchFilters,
@@ -15,7 +20,13 @@ from .types import (
 )
 
 __all__ = [
+    # Indexer
     "MeilisearchModelIndexer",
+    # Serializers
+    "MeilisearchOnlyHitsResponseSerializer",
+    "MeilisearchSearchResultsSerializer",
+    "MeilisearchSimpleSearchSerializer",
+    # Types
     "Faceting",
     "MeilisearchFilters",
     "MeilisearchFilterValue",
