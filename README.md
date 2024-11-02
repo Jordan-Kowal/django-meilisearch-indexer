@@ -13,9 +13,10 @@
   - [⚡ Quick start](#-quick-start)
   - [📕 Available modules](#-available-modules)
   - [🍜 Recipes](#-recipes)
-    - [Create index on boot](#create-index-on-boot)
+    - [Create indexes on boot](#create-indexes-on-boot)
     - [Async actions with celery](#async-actions-with-celery)
     - [Mock for testing](#mock-for-testing)
+    - [Admin actions](#admin-actions)
   - [🔗 Useful links](#-useful-links)
 
 Provides a `MeilisearchModelIndexer` class to easily index django models in Meilisearch.
@@ -102,11 +103,118 @@ TypoTolerance
 
 ## 🍜 Recipes
 
-### Create index on boot
+### Create indexes on boot
+
+Generate your indexes on boot using `AppConfig.ready()`.
+
+```python
+class TagConfig(AppConfig):
+    name = "tags"
+
+    def ready(self) -> None:
+        from django.conf import settings
+        from tags.indexers import TagIndexer
+
+        if settings.IS_RUNNING_MYPY or settings.ENVIRONMENT == "test":
+            return
+
+        TagIndexer.maybe_create_index()
+```
 
 ### Async actions with celery
 
+Make your indexation asynchronous using `celery` and `rabbitmq`.
+
+```python
+from typing import Dict, List
+from celery import shared_task
+from django.conf import settings
+from django.db.models import Q
+
+@shared_task(queue=settings.RABBITMQ_USER_QUEUE)
+def index_tags(ids: List[int]) -> Dict[str, str]:
+    from tags.indexers import TagIndexer
+
+    TagIndexer.index_from_query(Q(pk__in=ids))
+    return {"result": "ok"}
+
+# ...
+index_tags.s(ids).apply_async(countdown=5)
+```
+
 ### Mock for testing
+
+For testing, you'll need to mock the following tasks:
+
+```python
+from unittest import TestCase
+from unittest.mock import patch
+
+class TagTestCase(TestCase):
+    def setUp(self) -> None:
+        super().setUp()
+        self._mock_indexers()
+        self._mock_celery_tasks()
+
+    def _mock_indexers(self) -> None:
+        """
+        Patches the `index_name` functions of all indexers.
+        This allows running tests against a Meilisearch server
+        without overwriting the actual index.
+        """
+        self.indexer_mocks = [
+            patch(
+                "tags.indexers.TagIndexer.index_name",
+                return_value="test_tags",
+            ).start(),
+        ]
+
+    # If you are using celery tasks
+    def _mock_celery_tasks(self) -> None:
+        """Patches the celery tasks in both forms: `delay` and `apply_async`."""
+        names = [
+            "tags.tasks.index_tags.delay",
+            "tags.tasks.index_tags.apply_async",
+        ]
+        self.celery_task_mocks = {name: patch(name).start() for name in names}
+
+    def test_something(self):
+        # ...
+        self.celery_task_mocks[
+            "tags.tasks.index_tags.apply_async"
+        ].assert_called_once_with(([recipe.id],), {}, countdown=5)
+        # ...
+```
+
+### Admin actions
+
+To trigger your indexations through the django admin interface,
+you can add a custom action like so:
+
+```python
+from django.contrib import admin
+from django.db.models import QuerySet
+from django.http import HttpRequest, HttpResponseRedirect
+from tags import tasks
+from tags.models import Tag
+
+@admin.action(description="[Meilisearch] Index selected item(s)")
+def index_multiple(
+    model_admin: admin.ModelAdmin,
+    request: HttpRequest,
+    queryset: QuerySet,
+) -> HttpResponseRedirect:
+    ids = list(queryset.values_list("id", flat=True))
+    model_admin.index_task.s(ids).apply_async(countdown=5)
+    model_admin.message_user(request, f"Indexing {len(ids)} items(s) on Meilisearch")
+    return HttpResponseRedirect(request.get_full_path())
+
+
+class TagAdmin(admin.ModelAdmin):
+    index_task = tasks.index_tags
+    extra_actions = [index_multiple]
+    # ...
+```
 
 ## 🔗 Useful links
 
