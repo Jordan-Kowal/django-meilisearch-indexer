@@ -38,7 +38,7 @@ Here's a basic example:
 # Imports
 from typing import Any, Dict
 from django.db import models
-from django_meilisearch_indexer import MeilisearchModelIndexer
+from django_meilisearch_indexer.indexers import MeilisearchModelIndexer
 
 # Model
 class Tag(models.Model):
@@ -79,26 +79,30 @@ This library contains the following importable modules:
 
 ```python
 # The main indexer
-MeilisearchModelIndexer
+from django_meilisearch_indexer.indexers import MeilisearchModelIndexer
 
 # Some serializers for your API
-MeilisearchOnlyHitsResponseSerializer
-MeilisearchSearchResultsSerializer
-MeilisearchSimpleSearchSerializer
+from django_meilisearch_indexer.serializers import (
+    MeilisearchOnlyHitsResponseSerializer,
+    MeilisearchSearchResultsSerializer,
+    MeilisearchSimpleSearchSerializer,
+)
 
 # Lots of typing classes
-Faceting
-MeilisearchFilters
-MeilisearchFilterValue
-MeilisearchSearchHits
-MeilisearchSearchParameters
-MeilisearchSearchResults
-MeilisearchSettings
-MinWordSizeForTypos
-Pagination
-Precision
-RankingRule
-TypoTolerance
+from django_meilisearch_indexer.types import (
+    Faceting,
+    MeilisearchFilters,
+    MeilisearchFilterValue,
+    MeilisearchSearchHits,
+    MeilisearchSearchParameters,
+    MeilisearchSearchResults,
+    MeilisearchSettings,
+    MinWordSizeForTypos,
+    Pagination,
+    Precision,
+    RankingRule,
+    TypoTolerance,
+)
 ```
 
 ## 🍜 Recipes
