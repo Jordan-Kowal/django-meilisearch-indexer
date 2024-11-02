@@ -7,6 +7,6 @@
 - 🐞 Bugfixes
 - 🔧 Others
 
-## 1.0.0 - TBD
+## 0.0.1
 
 ✨ Official release of the `django_meilisearch_indexer` library ✨
