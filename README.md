@@ -23,11 +23,11 @@ Provides a `MeilisearchModelIndexer` class to easily index django models in Meil
 
 ## 💻 How to install
 
-The package is available on PyPi with the name `django_meilisearch_indexer`.
+The package is available on PyPi with the name `django-meilisearch-indexer`.
 Simply run:
 
 ```shell
-pip install django_meilisearch_indexer
+pip install django-meilisearch-indexer
 ```
 
 ## ⚡ Quick start
