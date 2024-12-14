@@ -18,6 +18,7 @@
     - [Mock for testing](#mock-for-testing)
     - [Admin actions](#admin-actions)
   - [🔗 Useful links](#-useful-links)
+  - [⏳ Stats](#-stats)
 
 Provides a `MeilisearchModelIndexer` class to easily index django models in Meilisearch.
 
@@ -224,3 +225,7 @@ class TagAdmin(admin.ModelAdmin):
 
 - [Want to contribute?](CONTRIBUTING.md)
 - [See what's new!](CHANGELOG.md)
+
+## ⏳ Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/214bbc23006d69fb79f3ab8d1ad4d6a7a8f4fe29.svg "Repobeats analytics image")
