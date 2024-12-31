@@ -7,6 +7,10 @@
 - 🐞 Bugfixes
 - 🔧 Others
 
+## 1.0.2 - 2024-12-31
+
+- 🔧 Upgraded production and development deps
+
 ## 1.0.1 - 2024-11-02
 
 - ✨ Official support for Python `3.13`
