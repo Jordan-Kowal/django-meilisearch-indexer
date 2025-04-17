@@ -7,6 +7,12 @@
 - 🐞 Bugfixes
 - 🔧 Others
 
+## 1.0.3 - 2025-04-18
+
+- 🔧 Removed `update_deps` action
+- 🔧 Added `dependabot` config for `uv` deps updates
+- 🔧 Upgraded deps
+
 ## 1.0.2 - 2024-12-31
 
 - 🐞 Fixed the workflow to publish the package as PyPi no longer supports username auth
