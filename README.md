@@ -4,7 +4,7 @@
 ![Tests](https://github.com/Jordan-Kowal/django-meilisearch-indexer/actions/workflows/tests.yml/badge.svg?branch=main)
 ![Build](https://github.com/Jordan-Kowal/django-meilisearch-indexer/actions/workflows/publish_package.yml/badge.svg?event=release)
 ![Coverage](https://badgen.net/badge/coverage/%3E90%25/pink)
-![Tag](https://badgen.net/badge/tag/1.0.1/orange)
+![Tag](https://badgen.net/badge/tag/1.0.2/orange)
 ![Python](https://badgen.net/badge/python/3.9%20|%203.10%20|%203.11%20|%203.12|%203.13)
 ![Licence](https://badgen.net/badge/licence/MIT)
 
@@ -18,6 +18,7 @@
     - [Mock for testing](#mock-for-testing)
     - [Admin actions](#admin-actions)
   - [🔗 Useful links](#-useful-links)
+  - [⏳ Stats](#-stats)
 
 Provides a `MeilisearchModelIndexer` class to easily index django models in Meilisearch.
 
@@ -224,3 +225,7 @@ class TagAdmin(admin.ModelAdmin):
 
 - [Want to contribute?](CONTRIBUTING.md)
 - [See what's new!](CHANGELOG.md)
+
+## ⏳ Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/214bbc23006d69fb79f3ab8d1ad4d6a7a8f4fe29.svg "Repobeats analytics image")
