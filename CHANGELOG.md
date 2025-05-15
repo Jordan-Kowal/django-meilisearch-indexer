@@ -7,6 +7,10 @@
 - 🐞 Bugfixes
 - 🔧 Others
 
+## TBD
+
+- 🔧 Added `CODEOWNERS` file and removed reviewers from dependabot
+
 ## 1.0.3 - 2025-04-18
 
 - 🔧 Removed `update_deps` action
