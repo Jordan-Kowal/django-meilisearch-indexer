@@ -87,7 +87,7 @@ class MeilisearchModelIndexer(ABC, Generic[M]):
     @classmethod
     def update_settings(cls) -> None:
         """Updates the index settings."""
-        cls.meilisearch_client().index(cls.index_name()).update_settings(cls.SETTINGS)  # type: ignore
+        cls.meilisearch_client().index(cls.index_name()).update_settings(cls.SETTINGS)
 
     # --------------------------------------------------
     # Indexing
@@ -123,7 +123,7 @@ class MeilisearchModelIndexer(ABC, Generic[M]):
         # Create temporary index
         tmp_index_name = f"{cls.index_name()}_tmp"
         client.create_index(tmp_index_name, {"primaryKey": cls.PRIMARY_KEY})
-        client.index(tmp_index_name).update_settings(cls.SETTINGS)  # type: ignore
+        client.index(tmp_index_name).update_settings(cls.SETTINGS)
         # Index all objects on it
         cls._index_from_query(Q(), tmp_index_name)
         # Swap indexes and cleanup
@@ -148,7 +148,7 @@ class MeilisearchModelIndexer(ABC, Generic[M]):
         cls,
         query: str = "",
         only_hits: bool = False,
-        filters: MeilisearchFilters = None,
+        filters: Optional[MeilisearchFilters] = None,
         **params: Unpack[MeilisearchSearchParameters],
     ) -> Union[MeilisearchSearchHits, MeilisearchSearchResults]:
         """
@@ -162,13 +162,13 @@ class MeilisearchModelIndexer(ABC, Generic[M]):
         Returns:
             Union[MeilisearchSearchHits, MeilisearchSearchResults]: Either the complete results or only the hits.
         """
-        filters = filters or {}
+        filters = filters or {}  # ty: ignore
         params["filter"] = cls._build_search_filter(**filters) or None
         response: MeilisearchSearchResults = (
-            cls.meilisearch_client().index(cls.index_name()).search(query, params)  # type: ignore
+            cls.meilisearch_client().index(cls.index_name()).search(query, params)
         )
         if only_hits:
-            return {"hits": response["hits"]}
+            return {"hits": response["hits"]}  # ty: ignore
         return response
 
     # --------------------------------------------------
@@ -205,19 +205,19 @@ class MeilisearchModelIndexer(ABC, Generic[M]):
 
     @staticmethod
     def _build_search_filter(
-        is_empty: List[str] = None,
-        is_not_empty: List[str] = None,
-        is_null: List[str] = None,
-        is_not_null: List[str] = None,
-        one_of: List[Tuple[str, List[MeilisearchFilterValue]]] = None,
-        none_of: List[Tuple[str, List[MeilisearchFilterValue]]] = None,
-        all_of: List[Tuple[str, List[MeilisearchFilterValue]]] = None,
-        eq: List[Tuple[str, MeilisearchFilterValue]] = None,
-        neq: List[Tuple[str, MeilisearchFilterValue]] = None,
-        gt: List[Tuple[str, MeilisearchFilterValue]] = None,
-        gte: List[Tuple[str, MeilisearchFilterValue]] = None,
-        lt: List[Tuple[str, MeilisearchFilterValue]] = None,
-        lte: List[Tuple[str, MeilisearchFilterValue]] = None,
+        is_empty: Optional[List[str]] = None,
+        is_not_empty: Optional[List[str]] = None,
+        is_null: Optional[List[str]] = None,
+        is_not_null: Optional[List[str]] = None,
+        one_of: Optional[List[Tuple[str, List[MeilisearchFilterValue]]]] = None,
+        none_of: Optional[List[Tuple[str, List[MeilisearchFilterValue]]]] = None,
+        all_of: Optional[List[Tuple[str, List[MeilisearchFilterValue]]]] = None,
+        eq: Optional[List[Tuple[str, MeilisearchFilterValue]]] = None,
+        neq: Optional[List[Tuple[str, MeilisearchFilterValue]]] = None,
+        gt: Optional[List[Tuple[str, MeilisearchFilterValue]]] = None,
+        gte: Optional[List[Tuple[str, MeilisearchFilterValue]]] = None,
+        lt: Optional[List[Tuple[str, MeilisearchFilterValue]]] = None,
+        lte: Optional[List[Tuple[str, MeilisearchFilterValue]]] = None,
     ) -> str:
         """Builds a search filter string for Meilisearch using the provided supported filters."""
         filters = []

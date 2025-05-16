@@ -10,6 +10,7 @@
 ## TBD
 
 - 🔧 Added `CODEOWNERS` file and removed reviewers from dependabot
+- 🔧 Migrated from `mypy` to `ty` for our type checker
 
 ## 1.0.3 - 2025-04-18
 

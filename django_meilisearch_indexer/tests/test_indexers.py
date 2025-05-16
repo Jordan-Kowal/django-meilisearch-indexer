@@ -60,7 +60,7 @@ class UserIndexer(MeilisearchModelIndexer[User]):
     @classmethod
     def build_object(cls, instance: User) -> Dict[str, Any]:
         return {
-            "id": instance.id,
+            "id": instance.id,  # ty: ignore
             "full_name": instance.full_name,
             "is_active": instance.is_active,
             "age": instance.age,
@@ -83,14 +83,14 @@ class UserIndexerTestCase(TestCase):
         cls.meilisearch_client = Client(
             settings.MEILISEARCH_HOST, settings.MEILISEARCH_API_KEY
         )
-        cls.user_1 = User.objects.create(
+        cls.user_1 = User.objects.create(  # ty: ignore
             first_name="John",
             last_name="Doe",
             email="a@a.com",
             is_active=True,
             age=30,
         )
-        cls.user_2 = User.objects.create(
+        cls.user_2 = User.objects.create(  # ty: ignore
             first_name="Jane",
             last_name="Doe",
             email="b@b.com",

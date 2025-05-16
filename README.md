@@ -120,7 +120,7 @@ class TagConfig(AppConfig):
         from django.conf import settings
         from tags.indexers import TagIndexer
 
-        if settings.IS_RUNNING_MYPY or settings.ENVIRONMENT == "test":
+        if settings.ENVIRONMENT == "test":
             return
 
         TagIndexer.maybe_create_index()

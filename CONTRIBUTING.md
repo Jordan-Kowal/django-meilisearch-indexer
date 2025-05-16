@@ -52,14 +52,14 @@ Run the following command to tell `git` to look for hooks in this folder:
 git config core.hooksPath .githooks
 ```
 
-Pre-commit hooks will run `ruff`, `mypy`, and `coverage` on each commit.
+Pre-commit hooks will run `ruff`, `ty`, and `coverage` on each commit.
 Make sure to have your **Meilisearch** instance running before committing.
 
 ### CI/CD
 
 We use GitHub actions to verify, build, and deploy the application. We currently have:
 
-- [code_quality](.github/workflows/code_quality.yml): runs `ruff`, `mypy`, and `coverage`
+- [code_quality](.github/workflows/code_quality.yml): runs `ruff`, `ty`, and `coverage`
 - [dependabot](.github/dependabot.yml): Dependabot configuration for dependencies
 - [publish_package](.github/workflows/publish_package.yml): Deploys the package on PyPi
 - [tests](.github/workflows/tests.yml): runs unittests on multiple Python versions (from 3.9 to 3.13)

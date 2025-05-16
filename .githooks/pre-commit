@@ -10,10 +10,10 @@ ruff check --select I .
 ruff check .
 ruff format --check .
 
-# MyPy (type checking)
+# Ty (type checking)
 echo ""
-echo ">>> [2/3] Running MyPy"
-mypy .
+echo ">>> [2/3] Running Ty"
+ty check . --error-on-warning
 
 # Run tests
 echo ""
