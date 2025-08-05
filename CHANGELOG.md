@@ -11,7 +11,7 @@
 
 - 🔧 Added `CODEOWNERS` file and removed reviewers from dependabot
 - 🔧 Migrated from `mypy` to `ty` for our type checker
-- 🔧 Fallback to `update-uv-lockfile` action for dependency upgrades
+- 🔧 Fallback to `update-uv-lockfile` action for monthly dependency updates
 
 ## 1.0.3 - 2025-04-18
 
